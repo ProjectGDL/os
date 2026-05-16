@@ -1,9 +1,10 @@
+ARG BASE_IMAGE=ghcr.io/ublue-os/base-kinoite:latest
+
 # Allow build scripts to be referenced without being copied into the final image
 FROM scratch AS ctx
 COPY build_files /
 
 # Base Image
-ARG BASE_IMAGE=ghcr.io/ublue-os/base-kinoite:latest
 FROM ${BASE_IMAGE}
 
 ## Other possible base images include:
