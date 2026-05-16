@@ -34,9 +34,9 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - base_image: ghcr.io/ublue-os/base-kinoite:latest
+          - base_image: ghcr.io/ublue-os/kinoite-main:latest
             image_flavor: main
-          - base_image: ghcr.io/ublue-os/base-kinoite-nvidia:latest
+          - base_image: ghcr.io/ublue-os/kinoite-nvidia:latest
             image_flavor: nvidia
 
     permissions:
