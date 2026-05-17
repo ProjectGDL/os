@@ -12,8 +12,8 @@ set -ouex pipefail
 # this installs a package from fedora repos
 dnf5 install -y btop fastfetch haruna zsh zsh-autosuggestions zsh-syntax-highlighting
 
-# remove unwanted kde games and apps
-dnf5 remove -y kmahjongg kmines firefox elisa-player
+# remove unwanted kde apps
+dnf5 remove -y firefox
 # Use a COPR Example:
 #
 # dnf5 -y copr enable ublue-os/staging
@@ -51,4 +51,4 @@ echo 'NoDisplay=true' >> /usr/share/applications/org.kde.kinfocenter.desktop
 echo 'NoDisplay=true' >> /usr/share/applications/org.kde.kdebugsettings.desktop
 
 sed -i 's|SHELL=/bin/bash|SHELL=/usr/bin/zsh|' /etc/default/useradd
-chsh -s /usr/bin/zsh root
+usermod -s /usr/bin/zsh root
