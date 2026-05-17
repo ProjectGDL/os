@@ -10,16 +10,20 @@ set -ouex pipefail
 # https://mirrors.rpmfusion.org/mirrorlist?path=free/fedora/updates/43/x86_64/repoview/index.html&protocol=https&redirect=1
 
 # this installs a package from fedora repos
-dnf5 install -y btop fastfetch
+dnf5 install -y btop fastfetch haruna
 
-# remove unwanted kde games
-dnf5 remove -y kmahjongg kmines
+# remove unwanted kde games and apps
+dnf5 remove -y kmahjongg kmines firefox elisa-player
 # Use a COPR Example:
 #
 # dnf5 -y copr enable ublue-os/staging
 # dnf5 -y install package
 # Disable COPRs so they don't end up enabled on the final image:
 # dnf5 -y copr disable ublue-os/staging
+
+dnf5 copr enable v8v88v8v88/helium
+dnf5 install -y helium
+dnf5 copr disable v8v88v8v88/helium
 
 #### Example for enabling a System Unit File
 
@@ -35,3 +39,4 @@ sed -i 's|^BUG_REPORT_URL=.*|BUG_REPORT_URL="https://github.com/ProjectGDL/issue
 
 rm /usr/share/applications/htop.desktop
 rm /usr/share/applications/nvtop.desktop
+rm /usr/share/applications/org.kde.kdebugsettings.desktop
