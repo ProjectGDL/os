@@ -10,7 +10,7 @@ set -ouex pipefail
 # https://mirrors.rpmfusion.org/mirrorlist?path=free/fedora/updates/43/x86_64/repoview/index.html&protocol=https&redirect=1
 
 # this installs a package from fedora repos
-dnf5 install -y tmux 
+dnf5 install -y tmux fastfetch
 
 # Use a COPR Example:
 #
@@ -22,3 +22,11 @@ dnf5 install -y tmux
 #### Example for enabling a System Unit File
 
 systemctl enable podman.socket
+
+### Modifying os-release
+sed -i 's/^NAME=.*/NAME="Project GDL"/' /usr/lib/os-release
+sed -i 's/^ID=.*/ID=gdl/' /usr/lib/os-release
+sed -i 's/^ID_LIKE=.*/ID_LIKE="fedora"/' /usr/lib/os-release
+sed -i 's/^PRETTY_NAME=.*/PRETTY_NAME="Project GDL"/' /usr/lib/os-release
+sed -i 's|^HOME_URL=.*|HOME_URL="https://github.com/ProjectGDL"|' /usr/lib/os-release
+sed -i 's|^BUG_REPORT_URL=.*|BUG_REPORT_URL="https://github.com/ProjectGDL/issues"|' /usr/lib/os-release
