@@ -10,7 +10,7 @@ set -ouex pipefail
 # https://mirrors.rpmfusion.org/mirrorlist?path=free/fedora/updates/43/x86_64/repoview/index.html&protocol=https&redirect=1
 
 # this installs a package from fedora repos
-dnf5 install -y btop fastfetch haruna
+dnf5 install -y btop fastfetch haruna zsh zsh-autosuggestions zsh-syntax-highlighting
 
 # remove unwanted kde games and apps
 dnf5 remove -y kmahjongg kmines firefox elisa-player
@@ -26,7 +26,7 @@ dnf5 install -y helium
 dnf5 copr disable -y v8v88v8v88/helium
 
 dnf5 copr enable -y liusen/Throne
-dnf5 install -y throne
+dnf5 install -y Throne
 dnf5 copr disable -y liusen/Throne
 
 #### Example for enabling a System Unit File
@@ -49,3 +49,6 @@ rm /usr/share/applications/nvtop.desktop
 
 echo 'NoDisplay=true' >> /usr/share/applications/org.kde.kinfocenter.desktop
 echo 'NoDisplay=true' >> /usr/share/applications/org.kde.kdebugsettings.desktop
+
+sed -i 's|SHELL=/bin/bash|SHELL=/usr/bin/zsh|' /etc/default/useradd
+chsh -s /usr/bin/zsh root
