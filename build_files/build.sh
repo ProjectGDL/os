@@ -21,9 +21,9 @@ dnf5 remove -y kmahjongg kmines firefox elisa-player
 # Disable COPRs so they don't end up enabled on the final image:
 # dnf5 -y copr disable ublue-os/staging
 
-dnf5 copr enable v8v88v8v88/helium
+dnf5 copr enable -y v8v88v8v88/helium
 dnf5 install -y helium
-dnf5 copr disable v8v88v8v88/helium
+dnf5 copr disable -y v8v88v8v88/helium
 
 #### Example for enabling a System Unit File
 
