@@ -25,6 +25,10 @@ dnf5 copr enable -y v8v88v8v88/helium
 dnf5 install -y helium
 dnf5 copr disable -y v8v88v8v88/helium
 
+dnf5 copr enable -y liusen/Throne
+dnf5 install -y throne
+dnf5 copr disable -y liusen/Throne
+
 #### Example for enabling a System Unit File
 
 systemctl enable podman.socket
@@ -36,7 +40,12 @@ sed -i 's/^ID_LIKE=.*/ID_LIKE="fedora"/' /usr/lib/os-release
 sed -i 's/^PRETTY_NAME=.*/PRETTY_NAME="Project GDL"/' /usr/lib/os-release
 sed -i 's|^HOME_URL=.*|HOME_URL="https://github.com/ProjectGDL"|' /usr/lib/os-release
 sed -i 's|^BUG_REPORT_URL=.*|BUG_REPORT_URL="https://github.com/ProjectGDL/issues"|' /usr/lib/os-release
+sed -i 's/^VARIANT=.*/VARIANT="with KDE Plasma"/' /usr/lib/os-release
+sed -i 's/^DEFAULT_HOSTNAME=.*/DEFAULT_HOSTNAME="gdl-desktop"/' /usr/lib/os-release
 
+rm /usr/share/applications/btop.desktop
 rm /usr/share/applications/htop.desktop
 rm /usr/share/applications/nvtop.desktop
-rm /usr/share/applications/org.kde.kdebugsettings.desktop
+
+echo 'NoDisplay=true' >> /usr/share/applications/org.kde.kinfocenter.desktop
+echo 'NoDisplay=true' >> /usr/share/applications/org.kde.kdebugsettings.desktop

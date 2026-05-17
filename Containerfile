@@ -7,6 +7,9 @@ COPY build_files /
 # Base Image
 FROM ${BASE_IMAGE}
 
+# Add Homebrew setup
+COPY --from=ghcr.io/ublue-os/brew:latest /system_files/ /
+
 ## Other possible base images include:
 # FROM ghcr.io/ublue-os/bazzite:latest
 # FROM ghcr.io/ublue-os/bluefin-nvidia:stable
