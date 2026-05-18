@@ -35,8 +35,6 @@ systemctl enable podman.socket
 
 ### Modifying os-release
 sed -i 's/^NAME=.*/NAME="Project GDL"/' /usr/lib/os-release
-sed -i 's/^ID=.*/ID=gdl/' /usr/lib/os-release
-sed -i 's/^ID_LIKE=.*/ID_LIKE="fedora"/' /usr/lib/os-release
 sed -i 's/^PRETTY_NAME=.*/PRETTY_NAME="Project GDL"/' /usr/lib/os-release
 sed -i 's|^HOME_URL=.*|HOME_URL="https://github.com/ProjectGDL"|' /usr/lib/os-release
 sed -i 's|^BUG_REPORT_URL=.*|BUG_REPORT_URL="https://github.com/ProjectGDL/issues"|' /usr/lib/os-release
@@ -52,3 +50,19 @@ echo 'NoDisplay=true' >> /usr/share/applications/org.kde.kdebugsettings.desktop
 
 sed -i 's|SHELL=/bin/bash|SHELL=/usr/bin/zsh|' /etc/default/useradd
 usermod -s /usr/bin/zsh root
+
+# Customizing UEFI Boot Entry Name (probably)
+echo "Customizing UEFI Boot Entry Name..."
+
+create_custom_boot_csv() {
+    local target_file="$1"
+    if [ -f "$target_file" ]; then
+        echo "Overwriting: $target_file"
+        printf "\xff\xfe" > "$target_file"
+        echo -n "shimx64.efi,Project GDL,,This is the boot loader for Project GDL" | iconv -f UTF-8 -t UTF-16LE >> "$target_file"
+    fi
+}
+
+find / -name "BOOTX64.CSV" 2>/dev/null | while read -r csv_path; do
+    create_custom_boot_csv "$csv_path"
+done

@@ -93,6 +93,9 @@ build $target_image=image_name $tag=default_tag:
     if [[ -z "$(git status -s)" ]]; then
         BUILD_ARGS+=("--build-arg" "SHA_HEAD_SHORT=$(git rev-parse --short HEAD)")
     fi
+    if [[ -n "${BASE_IMAGE:-}" ]]; then
+        BUILD_ARGS+=("--build-arg" "BASE_IMAGE=${BASE_IMAGE}")
+    fi
 
     podman build \
         "${BUILD_ARGS[@]}" \
